@@ -81,6 +81,9 @@ module JSON
       end
 
       fragments.each do |f|
+        f.gsub!('~1', '/')
+        f.gsub!('~0', '~')
+
         if base_schema.is_a?(JSON::Schema) #test if fragment is a JSON:Schema instance
           if !base_schema.schema.has_key?(f)
             raise JSON::Schema::SchemaError.new("Invalid fragment resolution for :fragment option")
